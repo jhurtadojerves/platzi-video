@@ -2,15 +2,16 @@ import React, { Component } from 'react'
 import './video.css'
 
 class Video extends Component {
-  togglePlay () {
-    if (this.props.pause)
+  togglePlay() {
+    if (this.props.pause) {
       this.video.play()
-    else
+    } else {
       this.video.pause()
+    }
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.pausa !== this.props.pause){
-      this.togglePlay()
+    if (nextProps.pause !== this.props.pause) {
+      this.togglePlay();
     }
   }
   setRef = element => {
@@ -18,15 +19,22 @@ class Video extends Component {
   }
   render() {
     const {
-      handleLoadedMetadata
+      handleLoadedMetadata,
+      handleTimeUpdate,
+      handleSeeking,
+      handleSeeked,
     } = this.props
+
     return (
       <div className="Video">
         <video
-          autoPlay={ this.props.autoplay }
-          src={ this.props.src }
-          ref={ this.setRef }
-          onLoadedMetadata={ handleLoadedMetadata }
+          autoPlay={this.props.autoplay}
+          src={this.props.src}
+          ref={this.setRef}
+          onLoadedMetadata={handleLoadedMetadata}
+          onTimeUpdate={handleTimeUpdate}
+          onSeeking={ handleSeeking }
+          onSeeked={ handleSeeked }
         />
       </div>
     )
